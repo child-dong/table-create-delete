@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>create/delete</title>
+	<link rel="stylesheet" href="">
+	<style>
+		table{
+			table-layout: fixed;
+		}
+		td,th{
+			border: 1px solid red;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+	</style>
+	<script>
+		window.onload = function(){
+			var tab = document.getElementsByTagName('table')[0];
+			var trs = tab.tBodies[0].rows;
+			var bg = null;
+			for(var i = 0;i < trs.length;i++){
+				if(i % 2 == 0){
+					trs[i].style.background = "gray";
+				}
+				trs[i].onmouseover = function(){
+					bg = this.style.background;
+					this.style.background = "yellow";
+				}
+				trs[i].onmouseout= function(){
+					this.style.background = bg;
+				}
+			}
+			var oA = document.getElementsByTagName('a');
+			var inp1 = document.getElementsByTagName('input')[0];
+			var inp2 = document.getElementsByTagName('input')[1];
+			var btn = document.getElementsByTagName('button')[0];
+			var id = tab.tBodies[0].rows.length+1;
+			btn.onclick = function(){
+				var oTr = document.createElement("tr");
+
+				var oTd = document.createElement("td");
+				oTd.innerHTML = ++id;
+				oTr.appendChild(oTd);
+
+				var oTd = document.createElement("td");
+				oTd.innerHTML = inp1.value;
+				oTr.appendChild(oTd);
+
+				var oTd = document.createElement("td");
+				oTd.innerHTML = inp2.value;
+				oTr.appendChild(oTd);
+
+				var oTd = document.createElement("td");
+				oTd.innerHTML = "<a href='javascript:'>delete</a>";
+				oTr.appendChild(oTd);	
+
+
+				tab.tBodies[0].appendChild(oTr)
+
+				for(var i = 0;i < trs.length;i++){
+					if(i % 2 == 0){
+						trs[i].style.background = "gray";
+					}
+					trs[i].onmouseover = function(){
+						bg = this.style.background;
+						this.style.background = "yellow";
+					}
+					trs[i].onmouseout= function(){
+						this.style.background = bg;
+					}
+				}
+
+				for(var j = 0;j<trs.length;j++){					
+					oA[j].onclick = function(){
+						// var deTd = this.parentNode;
+						tab.tBodies[0].removeChild(this.parentNode.parentNode);
+					}
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+  <input type="text">
+  <input type="text">
+	<button>新建</button>
+	<table style="width: 500px;border-collapse:collapse;text-align:center">
+		<thead>
+			<tr>
+				<th>1</th>
+				<th>2</th>
+				<th>3</th>
+				<th>4</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>2</td>
+				<td>3</td>
+				<td>4</td>
+				<td><a href="javascript:">delete</a></td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>6</td>
+				<td>7</td>
+				<td><a href="javascript:">delete</a></td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>6</td>
+				<td>7</td>
+				<td><a href="javascript:">delete</a></td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td>6</td>
+				<td>7</td>
+				<td><a href="javascript:">delete</a></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
